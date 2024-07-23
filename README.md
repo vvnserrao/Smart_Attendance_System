@@ -1,47 +1,51 @@
-# NSS Management System
+# Face Recognition Based Smart Attendance System
 
 ## Overview
 
-The NSS Management System is a web application designed to manage and streamline NSS (National Service Scheme) activities. It helps officers, secretaries, and volunteers efficiently handle tasks, track attendance, and manage events.
+The Face Recognition Based Smart Attendance System is designed to automate attendance tracking using face recognition technology. This system identifies individuals from live video feeds and records their attendance accurately and efficiently, making it suitable for schools, businesses, and other organizations.
+
+## Objectives
+
+- Implement Face Recognition Technology
+- Facilitate Seamless Integration
+- Automate Attendance Tracking
+- Enhance Accuracy and Efficiency
 
 ## Features
 
-- **Admin**: Manage officers, update details.
-- **Officer**: Manage student profiles, assign tasks, generate reports.
-- **Secretary**: Register events, manage attendance.
-- **Volunteer**: Track attendance, register for events.
+- **Face Encoding**: Extracts and encodes facial features from images.
+- **Real-Time Attendance Logging**: Recognizes faces in live video and logs attendance with timestamps.
+- **Attendance Records**: Maintains attendance records in CSV format, organized by date.
 
-## Technologies Used
+## Tools and Technologies
 
-- **Front End**: HTML, CSS, JavaScript
-- **Back End**: PHP
-- **Database**: MySQL
-- **Server**: XAMPP
+- **Programming Language**: Python
+- **Libraries**:
+  - OpenCV (Open Source Computer Vision Library)
+  - NumPy (Numerical Python)
+  - face_recognition Library
+  - Threading Module
 
-## Project Structure
+## Functionality
 
-1. **Admin**: Login, manage officers, update details.
-2. **Officer**: Login, manage profiles, assign tasks, upload photos.
-3. **Secretary**: Login, register events, manage attendance.
-4. **Volunteer**: Login, track attendance, register for events.
+### Encode Faces Function
 
-## Database Design
-
-The database consists of several tables, including:
-
-- `event_register`: Stores details of events registered by volunteers.
-- `gallery`: Contains images uploaded by the system.
-- `officer_profile`: Holds details of officers.
-- `pass`: Stores login details of officers, secretaries, and volunteers.
-- `report`: Keeps records of NSS activity reports.
-- `special_achievement`: Documents special achievements of volunteers.
-- `task`: Records tasks assigned to volunteers.
-- `volunteer_attendence`: Tracks volunteer attendance for activities.
-- `volunteer_profile`: Contains profiles of volunteers.
+```python
+def encode_faces():
+    encoded_data = {}
+    for dirpath, dnames, fnames in os.walk("./Images"):
+        for f in fnames:
+            if f.endswith(".jpg") or f.endswith(".png"):
+                face = fr.load_image_file("Images/" + f)
+                encoding = fr.face_encodings(face)[0]
+                encoded_data[f.split(".")[0]] = encoding
+    return encoded_data
+```
+- Extracts facial features from images in the designated directory.
+- Uses the face_recognition library to encode faces, generating unique representations for each individual.
+- Enables accurate identification of individuals within the attendance system.
 
 ## Installation
-
-To set up the project locally, follow these steps:
 
 1. Clone the repository:
    ```bash
@@ -49,18 +53,23 @@ To set up the project locally, follow these steps:
    ```
 2. Navigate to the project directory:
    ```bash
-   cd NSS_Management
+   cd Smart_Attendance_System
    ```
-3. Start the XAMPP server and ensure MySQL and Apache are running.
-4. Import the provided database schema into your MySQL server.
-5. Update the database connection settings in the project files as necessary.
-6. Access the project through your web browser.
+3. Install the required Python libraries:
+   ```bash
+   pip install opencv-python numpy face_recognition
+   ```
+4. Ensure you have a directory named `Images` containing the images of individuals to be recognized.
+5. Run the application:
+   ```bash
+   python main.py
+   ```
 
-## Team Members
+## Usage
 
-- Vivian Serrao
-- Hrithik
-- Melisha Shalini Pinto
-- Preethesh
+1. Start the application.
+2. The system will use the webcam to capture live video.
+3. It will recognize faces from the video feed and log attendance with timestamps in a CSV file.
+
 
 ---
